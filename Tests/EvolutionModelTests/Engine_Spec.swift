@@ -6,7 +6,7 @@ import XCTest
 import EvolutionModel
 
 
-class Engine_Spec: XCTestCase {
+final class Engine_Spec: XCTestCase {
 
     func test_empty_space_produces_no_changes() throws {
 

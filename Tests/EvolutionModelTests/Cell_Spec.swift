@@ -6,7 +6,7 @@ import XCTest
 import EvolutionModel
 
 
-class Cell_Spec: XCTestCase {
+final class Cell_Spec: XCTestCase {
 
     func test_Cell_created_from_integer_literal_has_one_agent_with_attribute_that_matches_integer_value() throws {
         let cell: Cell = 3
