@@ -17,24 +17,14 @@ public class Engine {
         }
     }
 
-    public struct Agent: Equatable, Hashable {
-        let attribute: Int
-    }
-
-    public struct Cell: Equatable, Hashable {
-        public private(set) var agents: [Agent]
-
-        mutating func add(agent: Agent) {
-            agents.append(agent)
-        }
-
-        mutating func remove(agent: Agent) {
-//            agents.remove(agent)
-        }
-    }
-
     public struct Behaviour: Equatable {
         let actions: [Action]
+    }
+
+    public enum Action: Equatable {
+        case remove(Agent)
+        case add(Agent, Direction)
+        case change(Agent, to: Agent)
     }
 
     public enum Direction: Equatable {
@@ -55,19 +45,7 @@ public class Engine {
         }
     }
 
-    public enum Action: Equatable {
-        case remove(Agent)
-        case add(Agent, Direction)
-        case change(Agent, to: Agent)
-    }
-
-    public struct Location: Equatable {
-        let i: Int
-        let j: Int
-    }
-
     public typealias SpaceChanges = [[[Action]]]
-
 
 
     // MARK: - Private State
@@ -105,14 +83,12 @@ public class Engine {
                         case .add(let agent, let direction):
                             let (newI, newJ) = direction.adjusted(i, j)
                             // TODO: add coordinates wrapping
-//                            newState.space[newI][newJ].add agents.insert(agent)
+                            newState.space[newI][newJ].add(agent: agent)
                         case .remove(let agent):
-                            break
-//                            newState.space[i][j].agents.remove(agent)
+                            newState.space[i][j].remove(agent: agent)
                         case .change(let from, to: let to):
-                            break
-//                            newState.space[i][j].agents.remove(from)
-//                            newState.space[i][j].agents.insert(to)
+                            newState.space[i][j].remove(agent: from)
+                            newState.space[i][j].add(agent: to)
                     }
                 }
             }
@@ -120,7 +96,7 @@ public class Engine {
         return newState
     }
 
-    public func interate(state: State) -> State {
+    public func iterate(state: State) -> State {
         // TODO: consider changes in behaviours
         let spaceChanges = determineSpaceChanges(for: state)
         return apply(spaceChanges: spaceChanges, to: state)
