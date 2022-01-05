@@ -84,8 +84,7 @@ public final class Engine {
                 for action in actions {
                     switch action {
                         case .add(let agent, let direction):
-                            let (newI, newJ) = direction.adjust(i, j)
-                            // TODO: add coordinates wrapping
+                            let (newI, newJ) = direction.adjust(i, j, width: row.count, height: spaceChanges.count)
                             newState.space[newI][newJ].add(agent: agent)
                         case .remove(let agent):
                             newState.space[i][j].remove(agent: agent)

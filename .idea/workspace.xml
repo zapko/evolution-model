@@ -15,6 +15,10 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$APPLICATION_HOME_DIR$/Resources/module_cache_13A1030d.zip!/5.5.1/x86_64/macosx12.0$macos/Swift/Protocols.swift" root0="SKIP_INSPECTION" />
+    <setting file="jar://$APPLICATION_HOME_DIR$/Resources/module_cache_13A1030d.zip!/5.5.1/x86_64/macosx12.0$macos/Swift/Math.Integers.swift" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProjectId" id="23DwvHYd9wmKUI72UBmm7I2OwUW" />
   <component name="ProjectViewState">
     <option name="foldersAlwaysOnTop" value="false" />
@@ -30,13 +34,28 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Swift Package Test.Direction_Spec">
+    <configuration name="Direction_Spec" type="SwiftPackageManagerTestRunConfiguration" factoryName="Swift Package Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="EvolutionModel" TARGET_NAME="EvolutionModelTests" CONFIG_NAME="Swift Package Run" RUN_TARGET_PROJECT_NAME="EvolutionModel" RUN_TARGET_NAME="EvolutionModelTests" TEST_CLASS="Direction_Spec" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="SPM.BUILD_TASK_PROVIDER" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="EvolutionModelTests" type="SwiftPackageManagerTestRunConfiguration" factoryName="Swift Package Test" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="EvolutionModel" TARGET_NAME="EvolutionModelTests" CONFIG_NAME="EvolutionModelTests" RUN_TARGET_PROJECT_NAME="EvolutionModel" RUN_TARGET_NAME="EvolutionModelTests" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="SPM.BUILD_TASK_PROVIDER" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Swift Package Test.EvolutionModelTests" />
+      <item itemvalue="Swift Package Test.Direction_Spec" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Swift Package Test.Direction_Spec" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
 </project>
