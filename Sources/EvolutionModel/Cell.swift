@@ -24,6 +24,8 @@ public struct Cell: Equatable,
         agents.remove(at: index)
     }
 
+    public static let empty = Cell(agents: [])
+
 
     // MARK: - Initialization / Deinitialization
 

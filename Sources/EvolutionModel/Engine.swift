@@ -7,6 +7,8 @@ import Foundation
 
 public final class Engine {
 
+    public typealias Behaviours = [Agent: [Cell: Behaviour]]
+
     public struct State: Equatable {
         var space: [[Cell]]
         var behaviours: Behaviours
@@ -17,12 +19,6 @@ public final class Engine {
         }
     }
 
-    public struct Behaviour: Equatable {
-        let actions: [Action]
-    }
-
-    public typealias Behaviours = [Agent: [Cell: Behaviour]]
-
     public enum Action: Equatable {
         case remove(Agent)
         case add(Agent, Direction)
@@ -31,8 +27,8 @@ public final class Engine {
 
     public typealias SpaceChanges = [[[Action]]]
     public struct BehaviourChanges {
-        let extincted: [Agent]
-        let new: Behaviours
+        public let extincted: [Agent]
+        public let new: Behaviours
 
         public init(extincted: [Agent], new: Behaviours) {
             self.extincted = extincted
@@ -70,7 +66,6 @@ public final class Engine {
                 cell in
                 cell.agents.flatMap {
                     agent in
-                    // TODO: implement new behaviour allocation
                     state.behaviours[agent]?[cell]?.actions ?? []
                 }
             }
