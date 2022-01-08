@@ -27,10 +27,10 @@ public final class Engine {
 
     public typealias SpaceChanges = [[[Action]]]
     public struct BehaviourChanges {
-        public let extincted: [Agent]
+        public let extincted: Set<Agent>
         public let new: Behaviours
 
-        public init(extincted: [Agent], new: Behaviours) {
+        public init(extincted: Set<Agent>, new: Behaviours) {
             self.extincted = extincted
             self.new       = new
         }
@@ -39,19 +39,39 @@ public final class Engine {
 
     // MARK: - Private State
 
+    private let actionsGenerator: () -> Action
 
     // MARK: - Initialization / Deinitialization
 
-    public init() {
-
+    public init(actionsGenerator: @escaping () -> Action) {
+        self.actionsGenerator = actionsGenerator
     }
 
 
     // MARK: - Engine
 
     public func determineBehaviourChanges(for state: State) -> BehaviourChanges {
-        // TODO: implement
-        return .init(extincted: [], new: [:])
+
+        let existingAgents = Set(state.space.flatMap { $0.flatMap { $0.agents } })
+        let knownAgents = Set(state.behaviours.keys)
+
+        return .init(
+            extincted: knownAgents.subtracting(existingAgents),
+            new: state.space.reduce(Behaviours()) {
+                (result, row) in
+
+                row.reduce(into: result) {
+                    (result, cell) in
+
+                    for agent in cell.agents {
+                        if state.behaviours[agent] != nil { continue }
+                        if result[agent] != nil { continue }
+
+                        result[agent] = [cell:.init(actions: [actionsGenerator()])]
+                    }
+                }
+            }
+        )
     }
 
     public func apply(behaviourChanges: BehaviourChanges, to state: State) -> State {
