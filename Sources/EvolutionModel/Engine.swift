@@ -26,57 +26,52 @@ public final class Engine {
     }
 
     public typealias SpaceChanges = [[[Action]]]
-    public struct BehaviourChanges {
-        public let extincted: Set<Agent>
-        public let new: Behaviours
-
-        public init(extincted: Set<Agent>, new: Behaviours) {
-            self.extincted = extincted
-            self.new       = new
-        }
-    }
 
 
     // MARK: - Private State
 
-    private let actionsGenerator: () -> Action
+    private let behaviourExpander: ([Cell: Behaviour]) -> Behaviour
 
     // MARK: - Initialization / Deinitialization
 
-    public init(actionsGenerator: @escaping () -> Action) {
-        self.actionsGenerator = actionsGenerator
+    public init(behaviourExpander: @escaping ([Cell: Behaviour]) -> Behaviour) {
+        self.behaviourExpander = behaviourExpander
     }
 
 
     // MARK: - Engine
 
-    public func determineBehaviourChanges(for state: State) -> BehaviourChanges {
+    public func determineNewBehaviours(for state: State) -> Behaviours {
 
         let existingAgents = Set(state.space.flatMap { $0.flatMap { $0.agents } })
         let knownAgents = Set(state.behaviours.keys)
 
-        return .init(
-            extincted: knownAgents.subtracting(existingAgents),
-            new: state.space.reduce(Behaviours()) {
-                (result, row) in
+        var result = state.behaviours
 
-                row.reduce(into: result) {
-                    (result, cell) in
+        // Removing extincted agents
+        knownAgents
+            .subtracting(existingAgents)
+            .forEach { result.removeValue(forKey: $0) }
 
-                    for agent in cell.agents {
-                        if state.behaviours[agent] != nil { continue }
-                        if result[agent] != nil { continue }
+        for row in state.space {
+            for cell in row {
+                for agent in cell.agents {
 
-                        result[agent] = [cell:.init(actions: [actionsGenerator()])]
+                    guard let agentBehaviours = result[agent] else {
+                        result[agent] = [cell: behaviourExpander([:])]
+                        continue
                     }
+
+                    if agentBehaviours[cell] != nil {
+                        continue
+                    }
+
+                    result[agent, default: [:]][cell] = behaviourExpander(agentBehaviours)
                 }
             }
-        )
-    }
+        }
 
-    public func apply(behaviourChanges: BehaviourChanges, to state: State) -> State {
-        // TODO: implement
-        return state
+        return result
     }
 
     public func determineSpaceChanges(for state: State) -> SpaceChanges {
@@ -114,8 +109,10 @@ public final class Engine {
     }
 
     public func iterate(state: State) -> State {
-        let behaviourChanges = determineBehaviourChanges(for: state)
-        let halfChangedState = apply(behaviourChanges: behaviourChanges, to: state)
+        let halfChangedState = State(
+            space: state.space,
+            behaviours: determineNewBehaviours(for: state)
+        )
         let spaceChanges = determineSpaceChanges(for: halfChangedState)
         return apply(spaceChanges: spaceChanges, to: halfChangedState)
     }
