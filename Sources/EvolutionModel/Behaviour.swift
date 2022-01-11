@@ -10,12 +10,6 @@ public typealias Behaviours = [Agent: [Cell: Behaviour]]
 public struct Behaviour: Equatable,
                          ExpressibleByArrayLiteral {
 
-    public enum Action: Equatable {
-        case remove(Agent)
-        case add(Agent, Direction)
-        case change(Agent, to: Agent)
-    }
-
 
     // MARK: - Private State
 

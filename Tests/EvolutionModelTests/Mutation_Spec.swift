@@ -19,7 +19,7 @@ final class Mutation_Spec: XCTestCase {
             return .add(.remove(1), at: 0)
         })
 
-        sut([.remove(2), .remove(3), .remove(4)])
+        _ = sut([.remove(2), .remove(3), .remove(4)])
 
         waitForExpectations(timeout: 0.1)
     }
@@ -32,6 +32,52 @@ final class Mutation_Spec: XCTestCase {
             sut(nil),
             [.remove(1)]
         )
+    }
+
+    func test_Mutation_picker_always_returns_add_at_0_when_length_is_zero() throws {
+
+        let sut = Mutation.makeMutationPicker(
+            actionGenerator: { .change(1, to: 2) })
+
+        for _ in 0...100 {
+            XCTAssertEqual(sut(0), .add(.change(1, to: 2), at: 0))
+        }
+    }
+
+    func test_Mutation_picker_uses_action_generator_to_get_new_actions() throws {
+
+        let generatorIsCalled = expectation(description: "Generator is called")
+
+        let sut = Mutation.makeMutationPicker(
+            actionGenerator: {
+                generatorIsCalled.fulfill()
+                return .change(1, to: 2) })
+
+        _ = sut(0)
+
+        waitForExpectations(timeout: 0.1)
+    }
+
+    func test_Mutation_picker_returns_random_mutation_with_index_from_0_to_length_minus_1 () throws {
+
+        let sut = Mutation.makeMutationPicker { .remove(0) }
+
+        struct Accumulator {
+            var additionIndices = Set<Int>()
+            var removalIndices = Set<Int>()
+        }
+
+        let accumulator = (0...1000)
+            .map { _ in sut(5) }
+            .reduce(into: Accumulator()) {
+                switch $1 {
+                case .remove(let index): $0.removalIndices.insert(index)
+                case .add(_, let index): $0.additionIndices.insert(index)
+                }
+            }
+
+        XCTAssertEqual(accumulator.removalIndices, Set([0, 1, 2, 3, 4]))
+        XCTAssertEqual(accumulator.additionIndices, Set([0, 1, 2, 3, 4, 5]))
     }
 }
 

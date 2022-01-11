@@ -95,7 +95,7 @@ final class Engine_Spec: XCTestCase {
 
         let newBehaviours = sut.determineNewBehaviours(for: state)
 
-        XCTAssertEqual(newBehaviours[2, default: [:]][2, default: []], [Behaviour.Action.change(3, to: 9)])
+        XCTAssertEqual(newBehaviours[2, default: [:]][2, default: []], [Action.change(3, to: 9)])
     }
 }
 

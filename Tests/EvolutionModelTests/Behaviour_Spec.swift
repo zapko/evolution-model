@@ -15,9 +15,9 @@ final class Behaviour_Spec: XCTestCase {
         XCTAssertEqual(
             sut.actions,
             [
-                Behaviour.Action.remove(5),
-                Behaviour.Action.add(3, .up),
-                Behaviour.Action.change(1, to: 4)
+                Action.remove(5),
+                Action.add(3, .up),
+                Action.change(1, to: 4)
             ]
         )
     }

@@ -17,7 +17,7 @@ public final class Engine {
         }
     }
 
-    public typealias SpaceChanges = [[[Behaviour.Action]]]
+    public typealias SpaceChanges = [[[Action]]]
 
 
     // MARK: - Private State
