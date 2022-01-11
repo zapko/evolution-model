@@ -30,6 +30,15 @@ public final class Engine {
         self.behaviourExpander = behaviourExpander
     }
 
+    public static func make(agentAttributeRange: ClosedRange<Agent.Attribute>) -> Engine {
+        .init(
+            behaviourExpander: Behaviour.makeExpander(
+                mutator: Mutation.makeMutator(
+                    picker: Mutation.makeMutationPicker(
+                        actionGenerator: Action.makeGenerator(
+                            attributesRange: agentAttributeRange)))))
+    }
+
 
     // MARK: - Engine
 
