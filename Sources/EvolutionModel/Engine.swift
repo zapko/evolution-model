@@ -7,8 +7,6 @@ import Foundation
 
 public final class Engine {
 
-    public typealias Behaviours = [Agent: [Cell: Behaviour]]
-
     public struct State: Equatable {
         var space: [[Cell]]
         var behaviours: Behaviours
@@ -19,22 +17,16 @@ public final class Engine {
         }
     }
 
-    public enum Action: Equatable {
-        case remove(Agent)
-        case add(Agent, Direction)
-        case change(Agent, to: Agent)
-    }
-
-    public typealias SpaceChanges = [[[Action]]]
+    public typealias SpaceChanges = [[[Behaviour.Action]]]
 
 
     // MARK: - Private State
 
-    private let behaviourExpander: ([Cell: Behaviour]) -> Behaviour
+    private let behaviourExpander: (Cell, [Cell: Behaviour]) -> Behaviour
 
     // MARK: - Initialization / Deinitialization
 
-    public init(behaviourExpander: @escaping ([Cell: Behaviour]) -> Behaviour) {
+    public init(behaviourExpander: @escaping (Cell, [Cell: Behaviour]) -> Behaviour) {
         self.behaviourExpander = behaviourExpander
     }
 
@@ -58,7 +50,7 @@ public final class Engine {
                 for agent in cell.agents {
 
                     guard let agentBehaviours = result[agent] else {
-                        result[agent] = [cell: behaviourExpander([:])]
+                        result[agent] = [cell: behaviourExpander(cell, [:])]
                         continue
                     }
 
@@ -66,7 +58,7 @@ public final class Engine {
                         continue
                     }
 
-                    result[agent, default: [:]][cell] = behaviourExpander(agentBehaviours)
+                    result[agent, default: [:]][cell] = behaviourExpander(cell, agentBehaviours)
                 }
             }
         }

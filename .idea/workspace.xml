@@ -35,8 +35,14 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="Swift Package Test.Engine_Spec">
+  <component name="RunManager" selected="Swift Package Test.Mutation_Spec">
     <configuration name="Behaviour_Spec" type="SwiftPackageManagerTestRunConfiguration" factoryName="Swift Package Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="EvolutionModel" TARGET_NAME="EvolutionModelTests" CONFIG_NAME="Swift Package Run" RUN_TARGET_PROJECT_NAME="EvolutionModel" RUN_TARGET_NAME="EvolutionModelTests" TEST_CLASS="Behaviour_Spec" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="SPM.BUILD_TASK_PROVIDER" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Cell_Spec" type="SwiftPackageManagerTestRunConfiguration" factoryName="Swift Package Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="EvolutionModel" TARGET_NAME="EvolutionModelTests" CONFIG_NAME="Swift Package Run" RUN_TARGET_PROJECT_NAME="EvolutionModel" RUN_TARGET_NAME="EvolutionModelTests" TEST_CLASS="Cell_Spec" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="SPM.BUILD_TASK_PROVIDER" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
@@ -60,17 +66,27 @@
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Mutation_Spec" type="SwiftPackageManagerTestRunConfiguration" factoryName="Swift Package Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="EvolutionModel" TARGET_NAME="EvolutionModelTests" CONFIG_NAME="Swift Package Run" RUN_TARGET_PROJECT_NAME="EvolutionModel" RUN_TARGET_NAME="EvolutionModelTests" TEST_CLASS="Mutation_Spec" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="SPM.BUILD_TASK_PROVIDER" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Swift Package Test.EvolutionModelTests" />
+      <item itemvalue="Swift Package Test.Behaviour_Spec" />
+      <item itemvalue="Swift Package Test.Mutation_Spec" />
+      <item itemvalue="Swift Package Test.Cell_Spec" />
       <item itemvalue="Swift Package Test.Direction_Spec" />
       <item itemvalue="Swift Package Test.Engine_Spec" />
-      <item itemvalue="Swift Package Test.Behaviour_Spec" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Swift Package Test.Mutation_Spec" />
         <item itemvalue="Swift Package Test.Engine_Spec" />
-        <item itemvalue="Swift Package Test.Behaviour_Spec" />
         <item itemvalue="Swift Package Test.Direction_Spec" />
+        <item itemvalue="Swift Package Test.Cell_Spec" />
+        <item itemvalue="Swift Package Test.Behaviour_Spec" />
       </list>
     </recent_temporary>
   </component>

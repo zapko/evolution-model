@@ -90,18 +90,18 @@ final class Engine_Spec: XCTestCase {
 
     func test_When_behaviour_for_new_agent_is_generated__action_is_taken_from_behaviour_expander() throws {
 
-        let sut = Engine.make(behaviourExpander: { _ in [.change(3, to: 9)] })
+        let sut = Engine.make(behaviourExpander: { _, _ in [.change(3, to: 9)] })
         let state = Engine.State(space: [[2]], behaviours: [:])
 
         let newBehaviours = sut.determineNewBehaviours(for: state)
 
-        XCTAssertEqual(newBehaviours[2, default: [:]][2, default: []], [Engine.Action.change(3, to: 9)])
+        XCTAssertEqual(newBehaviours[2, default: [:]][2, default: []], [Behaviour.Action.change(3, to: 9)])
     }
 }
 
 private extension Engine {
     static func make(
-        behaviourExpander: @escaping ([Cell:Behaviour]) -> Behaviour = { _ in [.remove(-1)] }
+        behaviourExpander: @escaping (Cell, [Cell:Behaviour]) -> Behaviour = { _, _ in [.remove(-1)] }
     ) -> Engine {
         Engine(behaviourExpander: behaviourExpander)
     }
