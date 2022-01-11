@@ -7,6 +7,7 @@ import Foundation
 
 public struct Cell: Equatable,
                     Hashable,
+                    Codable,
                     ExpressibleByIntegerLiteral,
                     ExpressibleByStringLiteral {
 

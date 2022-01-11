@@ -8,6 +8,8 @@ import Foundation
 public typealias Behaviours = [Agent: [Cell: Behaviour]]
 
 public struct Behaviour: Equatable,
+                         Hashable,
+                         Codable,
                          ExpressibleByArrayLiteral {
 
 

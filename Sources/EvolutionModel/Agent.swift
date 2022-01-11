@@ -7,6 +7,7 @@ import Foundation
 
 public struct Agent: Equatable,
                      Hashable,
+                     Codable,
                      ExpressibleByIntegerLiteral {
 
     public typealias Attribute = Int

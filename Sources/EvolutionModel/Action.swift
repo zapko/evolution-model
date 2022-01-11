@@ -5,7 +5,10 @@
 import Foundation
 
 
-public enum Action: Equatable, Hashable {
+public enum Action: Equatable,
+                    Hashable,
+                    Codable {
+
     case add(Agent, Direction)
     case remove(Agent)
     case change(Agent, to: Agent)
