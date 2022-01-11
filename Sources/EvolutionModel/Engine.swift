@@ -7,22 +7,13 @@ import Foundation
 
 public final class Engine {
 
-    public struct State: Equatable {
-        var space: [[Cell]]
-        var behaviours: Behaviours
-
-        public init(space: [[Cell]], behaviours: Behaviours) {
-            self.space      = space
-            self.behaviours = behaviours
-        }
-    }
-
     public typealias SpaceChanges = [[[Action]]]
 
 
     // MARK: - Private State
 
     private let behaviourExpander: (Cell, [Cell: Behaviour]) -> Behaviour
+
 
     // MARK: - Initialization / Deinitialization
 
