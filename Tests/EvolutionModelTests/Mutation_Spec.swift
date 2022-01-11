@@ -65,19 +65,22 @@ final class Mutation_Spec: XCTestCase {
         struct Accumulator {
             var additionIndices = Set<Int>()
             var removalIndices = Set<Int>()
+            var replacementIndices = Set<Int>()
         }
 
         let accumulator = (0...1000)
             .map { _ in sut(5) }
             .reduce(into: Accumulator()) {
                 switch $1 {
-                case .remove(let index): $0.removalIndices.insert(index)
                 case .add(_, let index): $0.additionIndices.insert(index)
+                case .remove(let index): $0.removalIndices.insert(index)
+                case .replace(let index, _): $0.replacementIndices.insert(index)
                 }
             }
 
-        XCTAssertEqual(accumulator.removalIndices, Set([0, 1, 2, 3, 4]))
         XCTAssertEqual(accumulator.additionIndices, Set([0, 1, 2, 3, 4, 5]))
+        XCTAssertEqual(accumulator.removalIndices, Set([0, 1, 2, 3, 4]))
+        XCTAssertEqual(accumulator.replacementIndices, Set([0, 1, 2, 3, 4]))
     }
 }
 
