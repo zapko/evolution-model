@@ -11,18 +11,14 @@ public struct Cell: Equatable,
                     ExpressibleByIntegerLiteral,
                     ExpressibleByStringLiteral {
 
-    public private(set) var agents: [Agent]
+    public private(set) var agents: Set<Agent>
 
     mutating public func add(agent: Agent) {
-        agents.append(agent)
+        agents.insert(agent)
     }
 
     mutating public func remove(agent: Agent) {
-        guard let index = agents.firstIndex(of: agent) else {
-            return
-        }
-
-        agents.remove(at: index)
+        agents.remove(agent)
     }
 
     public static let empty = Cell(agents: [])
@@ -31,25 +27,25 @@ public struct Cell: Equatable,
     // MARK: - Initialization / Deinitialization
 
     public init(agents: [Agent]) {
-        self.agents = agents
+        self.agents = Set(agents)
     }
 
 
     // MARK: - ExpressibleByIntegerLiteral
 
     public init(integerLiteral value: Int) {
-        agents = [.init(integerLiteral: value)]
+        agents = Set([.init(integerLiteral: value)])
     }
 
 
     // MARK: - ExpressibleByStringLiteral
 
     public init(stringLiteral value: String) {
-        agents = value
+        agents = Set(value
             .split(separator: ",")
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .compactMap(Int.init)
-            .map(Agent.init(attribute:))
+            .map(Agent.init(attribute:)))
     }
 }
 
