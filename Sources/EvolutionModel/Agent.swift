@@ -9,12 +9,14 @@ public struct Agent: Equatable,
                      Hashable,
                      ExpressibleByIntegerLiteral {
 
-    public let attribute: Int
+    public typealias Attribute = Int
+
+    public let attribute: Attribute
 
 
     // MARK: - Initialization / Deinitialization
 
-    public init(attribute: Int) {
+    public init(attribute: Attribute) {
         self.attribute = attribute
     }
 

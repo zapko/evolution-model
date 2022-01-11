@@ -5,7 +5,7 @@
 import Foundation
 
 
-public enum Direction: Equatable, Hashable {
+public enum Direction: Equatable, Hashable, CaseIterable {
     case none
     case up
     case down
