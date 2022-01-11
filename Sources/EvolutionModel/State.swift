@@ -6,8 +6,8 @@ import Foundation
 
 
 public struct State: Equatable, Hashable, Codable {
-    var space: [[Cell]]
-    var behaviours: Behaviours
+    public var space: [[Cell]]
+    public var behaviours: Behaviours
 
     public init(space: [[Cell]], behaviours: Behaviours) {
         self.space      = space
