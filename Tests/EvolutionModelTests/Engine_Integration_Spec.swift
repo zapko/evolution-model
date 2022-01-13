@@ -14,15 +14,15 @@ final class Engine_Integration_Spec: XCTestCase {
     func test_Composed_system_evolution_takes_reasonable_time() {
 
         let engine = Engine.make(agentAttributeRange: 1...10)
-        let initialState = State.make(rows: 10, columns: 10)
+        let initialWorld = World.make(rows: 10, columns: 10)
 
         measure {
 
-            var state = initialState
-            state.space[0][0] = 1
+            var world = initialWorld
+            world.space[0][0] = 1
 
             for _ in 1...50 {
-                state = engine.iterate(state: state)
+                world = engine.iterate(world: world)
             }
         }
     }

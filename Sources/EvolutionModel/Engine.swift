@@ -33,7 +33,7 @@ public final class Engine {
 
     // MARK: - Engine
 
-    public func determineNewBehaviours(for state: State) -> Behaviours {
+    public func determineNewBehaviours(for state: World) -> Behaviours {
 
         let existingAgents = Set(state.space.flatMap { $0.flatMap { $0.agents } })
         let knownAgents = Set(state.behaviours.keys)
@@ -66,7 +66,7 @@ public final class Engine {
         return result
     }
 
-    public func determineSpaceChanges(for state: State) -> SpaceChanges {
+    public func determineSpaceChanges(for state: World) -> SpaceChanges {
         state.space.map {
             row in
             row.map {
@@ -79,7 +79,7 @@ public final class Engine {
         }
     }
     
-    public func apply(spaceChanges: SpaceChanges, to state: State) -> State {
+    public func apply(spaceChanges: SpaceChanges, to state: World) -> World {
         var newState = state
         for (i, row) in spaceChanges.enumerated() {
             for (j, actions) in row.enumerated() {
@@ -100,12 +100,12 @@ public final class Engine {
         return newState
     }
 
-    public func iterate(state: State) -> State {
-        let halfChangedState = State(
-            space: state.space,
-            behaviours: determineNewBehaviours(for: state)
+    public func iterate(world: World) -> World {
+        let halfChangedWorld = World(
+            space: world.space,
+            behaviours: determineNewBehaviours(for: world)
         )
-        let spaceChanges = determineSpaceChanges(for: halfChangedState)
-        return apply(spaceChanges: spaceChanges, to: halfChangedState)
+        let spaceChanges = determineSpaceChanges(for: halfChangedWorld)
+        return apply(spaceChanges: spaceChanges, to: halfChangedWorld)
     }
 }

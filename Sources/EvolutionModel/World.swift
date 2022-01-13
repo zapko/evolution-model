@@ -5,7 +5,7 @@
 import Foundation
 
 
-public struct State: Equatable, Hashable, Codable {
+public struct World: Equatable, Hashable, Codable {
     public var space: [[Cell]]
     public var behaviours: Behaviours
 
@@ -14,7 +14,7 @@ public struct State: Equatable, Hashable, Codable {
         self.behaviours = behaviours
     }
 
-    public static func make(rows: Int, columns: Int) -> State {
+    public static func make(rows: Int, columns: Int) -> World {
         .init(
             space: Array<Array<Cell>>(
                 repeating: Array<Cell>(repeating: .empty, count: columns),
